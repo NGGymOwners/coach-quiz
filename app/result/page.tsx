@@ -95,31 +95,31 @@ function ResultInner() {
         </div>
 
         <div className="bg-background-elevated rounded-lg p-8 mb-10 border border-border">
-          <p className="font-display text-accent tracking-widest text-sm mb-2">
+          <p className="font-display text-accent tracking-widest text-base mb-2">
             ARCHETYPE
           </p>
-          <h2 className="font-display text-4xl sm:text-5xl mb-3">
+          <h2 className="font-display text-5xl sm:text-6xl mb-3">
             {archetype.name}
           </h2>
-          <p className="text-accent text-lg italic mb-5">{archetype.tagline}</p>
-          <p className="text-foreground-muted leading-relaxed">
+          <p className="text-accent text-xl italic mb-5">{archetype.tagline}</p>
+          <p className="text-foreground-muted leading-relaxed text-lg">
             {archetype.description}
           </p>
         </div>
 
         <div className="grid sm:grid-cols-2 gap-6 mb-12">
           <div>
-            <p className="font-display text-accent tracking-widest text-xs mb-3">
+            <p className="font-display text-accent tracking-widest text-sm mb-3">
               TOP STRENGTHS
             </p>
             <ul className="space-y-2">
               {result.topStrengths.map((id) => (
                 <li
                   key={id}
-                  className="bg-background-elevated px-4 py-3 rounded-md border border-border"
+                  className="bg-background-elevated px-4 py-3 rounded-md border border-border text-lg"
                 >
-                  <span className="text-foreground-muted text-xs mr-2">
-                    Ch {CHAPTERS[id].number}
+                  <span className="text-foreground-muted text-sm mr-2">
+                    Pillar {CHAPTERS[id].number}
                   </span>
                   {CHAPTERS[id].shortLabel}
                 </li>
@@ -127,22 +127,22 @@ function ResultInner() {
             </ul>
           </div>
           <div>
-            <p className="font-display text-accent tracking-widest text-xs mb-3">
+            <p className="font-display text-accent tracking-widest text-sm mb-3">
               {result.hasMeaningfulGaps ? "TOP GAPS" : "AREAS TO DEEPEN"}
             </p>
             <ul className="space-y-2">
               {result.topGaps.map((id) => (
                 <li
                   key={id}
-                  className="bg-background-elevated px-4 py-3 rounded-md border border-border relative overflow-hidden"
+                  className="bg-background-elevated px-4 py-3 rounded-md border border-border relative overflow-hidden text-lg"
                 >
-                  <span className="text-foreground-muted text-xs mr-2">
-                    Ch {CHAPTERS[id].number}
+                  <span className="text-foreground-muted text-sm mr-2">
+                    Pillar {CHAPTERS[id].number}
                   </span>
                   <span className="blur-sm select-none">
                     {CHAPTERS[id].shortLabel}
                   </span>
-                  <span className="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-accent">
+                  <span className="absolute right-3 top-1/2 -translate-y-1/2 text-sm text-accent">
                     🔒
                   </span>
                 </li>
@@ -152,11 +152,11 @@ function ResultInner() {
         </div>
 
         <div className="bg-background-elevated rounded-lg p-8 border border-border">
-          <h3 className="font-display text-2xl mb-2">
+          <h3 className="font-display text-3xl mb-2">
             Unlock your personalized report
           </h3>
-          <p className="text-foreground-muted mb-6">
-            Get the full chapter-by-chapter breakdown plus 2 specific actions for each gap.
+          <p className="text-foreground-muted mb-6 text-lg">
+            Get the full pillar-by-pillar breakdown plus 2 specific actions for each gap.
           </p>
           <form onSubmit={unlock} className="flex flex-col sm:flex-row gap-3">
             <input

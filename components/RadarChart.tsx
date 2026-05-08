@@ -7,10 +7,10 @@ type Props = {
   topGaps?: ChapterId[];
 };
 
-const SIZE = 320;
+const SIZE = 360;
 const CENTER = SIZE / 2;
-const RADIUS = 120;
-const LABEL_RADIUS = RADIUS + 20;
+const RADIUS = 130;
+const LABEL_RADIUS = RADIUS + 26;
 const RINGS = [25, 50, 75, 100];
 
 function pointFor(idx: number, value: number, total: number, r: number = RADIUS) {
@@ -102,19 +102,19 @@ export default function RadarChart({ subScores, topGaps = [] }: Props) {
               x={p.x}
               y={p.y - 4}
               textAnchor="middle"
-              fontSize={11}
+              fontSize={13}
               fontWeight={700}
               fill={isGap ? "var(--accent)" : "var(--foreground-muted)"}
               fontFamily="var(--font-bebas)"
               style={{ letterSpacing: "0.1em" }}
             >
-              CH {ch.number}
+              PILLAR {ch.number}
             </text>
             <text
               x={p.x}
-              y={p.y + 9}
+              y={p.y + 11}
               textAnchor="middle"
-              fontSize={11}
+              fontSize={13}
               fontWeight={600}
               fill={isGap ? "var(--accent)" : "var(--foreground-muted)"}
             >

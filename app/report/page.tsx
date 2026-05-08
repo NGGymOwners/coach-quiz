@@ -71,8 +71,8 @@ function ReportInner() {
         </div>
 
         <section className="mb-12">
-          <h2 className="font-display text-2xl tracking-widest text-accent mb-6 text-center">
-            CHAPTER BREAKDOWN
+          <h2 className="font-display text-3xl tracking-widest text-accent mb-6 text-center">
+            PILLAR BREAKDOWN
           </h2>
           <div className="bg-background-elevated rounded-lg p-6 border border-border mb-4">
             <RadarChart
@@ -80,7 +80,7 @@ function ReportInner() {
               topGaps={result.hasMeaningfulGaps ? result.topGaps : []}
             />
           </div>
-          <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 text-sm">
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 text-base">
             {CHAPTER_ORDER.map((id) => {
               const ch = CHAPTERS[id];
               const score = result.subScores[id];
@@ -89,25 +89,25 @@ function ReportInner() {
               return (
                 <div
                   key={id}
-                  className={`px-3 py-2 rounded-md border ${
+                  className={`px-4 py-3 rounded-md border ${
                     isGap
                       ? "border-accent bg-background-elevated"
                       : "border-border bg-background-elevated/50"
                   }`}
                 >
                   <div className="flex items-baseline justify-between gap-2">
-                    <span className="text-foreground-muted text-xs">
-                      Ch {ch.number}
+                    <span className="text-foreground-muted text-sm">
+                      Pillar {ch.number}
                     </span>
                     <span
-                      className={`font-display text-lg ${
+                      className={`font-display text-2xl ${
                         isGap ? "text-accent" : "text-foreground-muted"
                       }`}
                     >
                       {score}
                     </span>
                   </div>
-                  <div className="text-xs leading-tight">{ch.shortLabel}</div>
+                  <div className="text-sm leading-tight">{ch.shortLabel}</div>
                 </div>
               );
             })}
@@ -115,13 +115,13 @@ function ReportInner() {
         </section>
 
         <section className="mb-12">
-          <h2 className="font-display text-2xl tracking-widest text-accent mb-6">
+          <h2 className="font-display text-3xl tracking-widest text-accent mb-6">
             {result.hasMeaningfulGaps
               ? "FOCUS HERE FIRST"
               : "AREAS TO DEEPEN"}
           </h2>
           {!result.hasMeaningfulGaps && (
-            <p className="text-foreground-muted mb-6">
+            <p className="text-foreground-muted mb-6 text-lg">
               Your scores are well-balanced across the six pillars — there&apos;s no
               dominant gap. Two areas worth deepening anyway:
             </p>
@@ -134,20 +134,20 @@ function ReportInner() {
                   key={id}
                   className="bg-background-elevated rounded-lg p-6 border border-border"
                 >
-                  <p className="font-display text-accent tracking-widest text-xs mb-2">
-                    CHAPTER {ch.number}
+                  <p className="font-display text-accent tracking-widest text-sm mb-2">
+                    PILLAR {ch.number}
                   </p>
-                  <h3 className="font-display text-2xl mb-3">{ch.title}</h3>
-                  <p className="text-foreground-muted mb-5 leading-relaxed">
+                  <h3 className="font-display text-3xl mb-3">{ch.title}</h3>
+                  <p className="text-foreground-muted mb-5 leading-relaxed text-lg">
                     {ch.gapHeadline}
                   </p>
                   <ol className="space-y-4">
                     {ch.gapActions.map((action, i) => (
                       <li key={i} className="flex gap-4">
-                        <span className="font-display text-accent text-2xl leading-none">
+                        <span className="font-display text-accent text-3xl leading-none">
                           0{i + 1}
                         </span>
-                        <p className="leading-relaxed">{action}</p>
+                        <p className="leading-relaxed text-lg">{action}</p>
                       </li>
                     ))}
                   </ol>
@@ -159,8 +159,8 @@ function ReportInner() {
 
         <section className="bg-background-elevated rounded-lg p-8 border border-accent-dim text-center mb-8">
           <h3 className="font-display text-3xl mb-3">Want the full playbook?</h3>
-          <p className="text-foreground-muted mb-6 max-w-lg mx-auto">
-            This report previews two chapters. The Cheer Coaches&apos; Handbook covers all
+          <p className="text-foreground-muted mb-6 max-w-lg mx-auto text-lg">
+            This report previews two pillars. The Cheer Coaches&apos; Handbook covers all
             six pillars in depth, with worksheets you can run with your staff.
           </p>
           <a

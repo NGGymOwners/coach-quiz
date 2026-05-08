@@ -36,7 +36,7 @@ export default function QuizPage() {
   return (
     <main className="flex flex-1 items-center justify-center px-6 py-12">
       <div className="max-w-2xl w-full">
-        <div className="flex items-center justify-between mb-8 text-sm text-foreground-muted">
+        <div className="flex items-center justify-between mb-8 text-base text-foreground-muted">
           <span className="font-display tracking-widest">
             QUESTION {idx + 1} / {total}
           </span>
@@ -56,10 +56,10 @@ export default function QuizPage() {
           />
         </div>
 
-        <p className="text-accent font-display tracking-widest text-sm mb-4">
+        <p className="text-accent font-display tracking-widest text-base mb-4">
           {q.pillar.toUpperCase()}
         </p>
-        <h2 className="text-2xl sm:text-3xl font-semibold leading-snug mb-10">
+        <h2 className="text-3xl sm:text-4xl font-semibold leading-snug mb-10">
           {q.prompt}
         </h2>
 
@@ -68,13 +68,13 @@ export default function QuizPage() {
             <button
               key={opt.value}
               onClick={() => pick(opt.value)}
-              className={`w-full text-left px-5 py-4 rounded-md border transition-all ${
+              className={`w-full text-left px-6 py-5 rounded-md border transition-all text-lg ${
                 current === opt.value
                   ? "border-accent bg-background-elevated"
                   : "border-border hover:border-border-strong bg-background-elevated/40"
               }`}
             >
-              <span className="text-foreground-muted text-sm font-mono mr-4">
+              <span className="text-foreground-muted text-base font-mono mr-4">
                 {opt.value}
               </span>
               <span>{opt.label}</span>
