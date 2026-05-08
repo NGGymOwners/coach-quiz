@@ -34,14 +34,18 @@ export async function POST(request: Request) {
     ua: request.headers.get("user-agent") ?? null,
   };
 
-  try {
-    const dir =
-      process.env.COACH_QUIZ_LOG_DIR ?? path.join(os.tmpdir(), "coach-quiz");
-    await fs.mkdir(dir, { recursive: true });
-    const logPath = path.join(dir, "emails.jsonl");
-    await fs.appendFile(logPath, JSON.stringify(record) + "\n", "utf8");
-  } catch (err) {
-    console.error("[coach-quiz/api/email] log write failed", err);
+  console.log("[coach-quiz/email]", JSON.stringify(record));
+
+  if (!process.env.VERCEL) {
+    try {
+      const dir =
+        process.env.COACH_QUIZ_LOG_DIR ?? path.join(os.tmpdir(), "coach-quiz");
+      await fs.mkdir(dir, { recursive: true });
+      const logPath = path.join(dir, "emails.jsonl");
+      await fs.appendFile(logPath, JSON.stringify(record) + "\n", "utf8");
+    } catch (err) {
+      console.error("[coach-quiz/api/email] local log write failed", err);
+    }
   }
 
   return NextResponse.json({ ok: true });
