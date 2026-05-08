@@ -5,7 +5,7 @@ export default function Landing() {
     <main className="flex flex-1 items-center justify-center px-6 py-16">
       <div className="max-w-2xl w-full text-center">
         <p className="font-display text-accent text-xl tracking-[0.3em] mb-6">
-          CHEER COACHES&apos; HANDBOOK
+          NEXT GENERATION GYM OWNERS
         </p>
         <h1 className="font-display text-6xl sm:text-8xl leading-[0.95] mb-6">
           What&apos;s Your

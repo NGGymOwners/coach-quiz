@@ -14,9 +14,9 @@ const bebas = Bebas_Neue({
 });
 
 export const metadata: Metadata = {
-  title: "What's Your Coach Development Style? | Cheer Coaches' Handbook",
+  title: "What's Your Coach Development Style? | Next Generation Gym Owners",
   description:
-    "A 9-question diagnostic for cheer gym owners. Score how well you train your coaches across the six pillars from the Cheer Coaches' Handbook.",
+    "A 9-question diagnostic for cheer gym owners from Next Generation Gym Owners. Score how well you train your coaches across the six pillars that separate good programs from great ones.",
 };
 
 export default function RootLayout({

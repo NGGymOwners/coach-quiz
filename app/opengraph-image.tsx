@@ -1,6 +1,6 @@
 import { ImageResponse } from "next/og";
 
-export const alt = "What's Your Coach Development Style? — Cheer Coaches' Handbook quiz";
+export const alt = "What's Your Coach Development Style? — Next Generation Gym Owners quiz";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -23,13 +23,13 @@ export default async function OG() {
         <div
           style={{
             color: "#d4a635",
-            fontSize: 28,
+            fontSize: 26,
             fontWeight: 700,
-            letterSpacing: 8,
+            letterSpacing: 6,
             marginBottom: 32,
           }}
         >
-          CHEER COACHES&apos; HANDBOOK
+          NEXT GENERATION GYM OWNERS
         </div>
         <div
           style={{

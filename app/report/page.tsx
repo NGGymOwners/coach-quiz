@@ -160,7 +160,7 @@ function ReportInner() {
         <section className="bg-background-elevated rounded-lg p-8 border border-accent-dim text-center mb-8">
           <h3 className="font-display text-3xl mb-3">Want the full playbook?</h3>
           <p className="text-foreground-muted mb-6 max-w-lg mx-auto text-lg">
-            This report previews two pillars. The Cheer Coaches&apos; Handbook covers all
+            This report previews two pillars. Next Generation Gym Owners covers all
             six pillars in depth, with worksheets you can run with your staff.
           </p>
           <a
