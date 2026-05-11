@@ -53,6 +53,7 @@ function ResultInner() {
           score: result.total,
           archetype: result.archetype,
           topGap: result.topGaps[0],
+          topStrength: result.topStrengths[0],
         }),
       });
       if (!res.ok) {
