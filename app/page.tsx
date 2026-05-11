@@ -8,11 +8,9 @@ export default function Landing() {
           NEXT GENERATION GYM OWNERS
         </p>
         <h1 className="font-display text-6xl sm:text-8xl leading-[0.95] mb-6">
-          What&apos;s Your
+          Staff Development
           <br />
-          <span className="text-accent">Coach Development</span>
-          <br />
-          Style?
+          <span className="text-accent">Audit</span>
         </h1>
         <p className="text-foreground-muted text-xl mb-10 max-w-xl mx-auto">
           A 9-question diagnostic for cheer gym owners. Score how well you train
