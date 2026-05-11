@@ -157,6 +157,7 @@ function ReportInner() {
           </div>
         </section>
 
+        {/* "Get the book" CTA temporarily removed — restore this section to bring it back.
         <section className="bg-background-elevated rounded-lg p-8 border border-accent-dim text-center mb-8">
           <h3 className="font-display text-3xl mb-3">Want the full playbook?</h3>
           <p className="text-foreground-muted mb-6 max-w-lg mx-auto text-lg">
@@ -170,8 +171,9 @@ function ReportInner() {
             Get the book
           </a>
         </section>
+        */}
 
-        <section className="text-center">
+        <section className="text-center mt-8">
           <p className="font-display text-foreground-muted tracking-widest text-xs mb-4">
             SHARE YOUR RESULT
           </p>
