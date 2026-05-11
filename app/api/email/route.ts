@@ -33,6 +33,8 @@ type Payload = {
   lastName?: string;
   phone?: string;
   email: string;
+  consent?: boolean;
+  consentText?: string;
   score?: number;
   archetype?: string;
   topGap?: string;
@@ -123,6 +125,15 @@ export async function POST(request: Request) {
     );
   }
 
+  if (body.consent !== true) {
+    return NextResponse.json(
+      { ok: false, error: "consent_required" },
+      { status: 400 }
+    );
+  }
+  const consentText = (body.consentText ?? "").trim();
+  const consentedAt = new Date().toISOString();
+
   const score = typeof body.score === "number" ? body.score : null;
   const archetype =
     typeof body.archetype === "string" && ARCHETYPE_IDS.has(body.archetype)
@@ -144,6 +155,11 @@ export async function POST(request: Request) {
     phone: phoneDisplay,
     phoneDigits,
     email,
+    consent: true,
+    consentText,
+    consentedAt,
+    smsOptIn: true,
+    emailOptIn: true,
     score,
     scoreBand: score !== null ? scoreBand(score) : null,
     archetype,
@@ -153,8 +169,12 @@ export async function POST(request: Request) {
     topStrength,
     topStrengthLabel: chapterLabel(topStrength),
     source: "coach-quiz",
-    capturedAt: new Date().toISOString(),
+    capturedAt: consentedAt,
     ua: request.headers.get("user-agent") ?? null,
+    ip:
+      request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ??
+      request.headers.get("x-real-ip") ??
+      null,
   };
 
   console.log("[coach-quiz/email]", JSON.stringify(record));

@@ -13,8 +13,12 @@ function ResultInner() {
   const [lastName, setLastName] = useState("");
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
+  const [consented, setConsented] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
+
+  const CONSENT_TEXT =
+    "I agree to receive email and occasional text messages from Next Generation Gym Owners related to coaching, gym ownership, and the Cheer Coaches' Handbook. Message and data rates may apply. Reply STOP at any time to unsubscribe.";
 
   const result = useMemo(() => {
     const answers = parseAnswersFromParams(searchParams);
@@ -56,6 +60,8 @@ function ResultInner() {
           lastName,
           phone,
           email,
+          consent: consented,
+          consentText: CONSENT_TEXT,
           score: result.total,
           archetype: result.archetype,
           topGap: result.topGaps[0],
@@ -68,6 +74,8 @@ function ResultInner() {
           invalid_email: "That email doesn't look right. Try again?",
           invalid_name: "Please add your first and last name.",
           invalid_phone: "That phone number doesn't look right.",
+          consent_required:
+            "Please check the consent box to receive your report.",
         };
         setSubmitError(
           (data.error && messageByError[data.error]) ||
@@ -208,6 +216,18 @@ function ResultInner() {
               placeholder="you@gym.com"
               className="w-full bg-background border border-border rounded-md px-4 py-3 text-lg focus:outline-none focus:border-accent"
             />
+            <label className="flex items-start gap-3 cursor-pointer select-none py-2">
+              <input
+                type="checkbox"
+                required
+                checked={consented}
+                onChange={(e) => setConsented(e.target.checked)}
+                className="mt-1 size-5 accent-accent shrink-0 cursor-pointer"
+              />
+              <span className="text-foreground-muted text-sm leading-snug">
+                {CONSENT_TEXT}
+              </span>
+            </label>
             <button
               type="submit"
               disabled={submitting}
@@ -219,10 +239,6 @@ function ResultInner() {
           {submitError && (
             <p className="text-red-400 text-sm mt-3">{submitError}</p>
           )}
-          <p className="text-foreground-dim text-xs mt-4">
-            We&apos;ll only use your info to send your report and occasional coaching
-            tips. No spam. Unsubscribe any time.
-          </p>
         </div>
       </div>
     </main>
