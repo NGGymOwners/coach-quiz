@@ -11,6 +11,7 @@ import {
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const GHL_TIMEOUT_MS = 5000;
+const MIN_PHONE_DIGITS = 10;
 
 const ARCHETYPE_IDS = new Set<string>([
   "operator",
@@ -28,12 +29,20 @@ const CHAPTER_IDS = new Set<string>([
 ]);
 
 type Payload = {
+  firstName?: string;
+  lastName?: string;
+  phone?: string;
   email: string;
   score?: number;
   archetype?: string;
   topGap?: string;
   topStrength?: string;
 };
+
+function normalizePhone(raw: string): { display: string; digits: string } {
+  const digits = raw.replace(/\D+/g, "");
+  return { display: raw.trim(), digits };
+}
 
 function scoreBand(score: number): string {
   if (score >= 85) return "85-100";
@@ -95,6 +104,25 @@ export async function POST(request: Request) {
     );
   }
 
+  const firstName = (body.firstName ?? "").trim();
+  const lastName = (body.lastName ?? "").trim();
+  if (!firstName || !lastName) {
+    return NextResponse.json(
+      { ok: false, error: "invalid_name" },
+      { status: 400 }
+    );
+  }
+
+  const phoneRaw = (body.phone ?? "").trim();
+  const { display: phoneDisplay, digits: phoneDigits } =
+    normalizePhone(phoneRaw);
+  if (phoneDigits.length < MIN_PHONE_DIGITS) {
+    return NextResponse.json(
+      { ok: false, error: "invalid_phone" },
+      { status: 400 }
+    );
+  }
+
   const score = typeof body.score === "number" ? body.score : null;
   const archetype =
     typeof body.archetype === "string" && ARCHETYPE_IDS.has(body.archetype)
@@ -110,6 +138,11 @@ export async function POST(request: Request) {
       : null;
 
   const record = {
+    firstName,
+    lastName,
+    fullName: `${firstName} ${lastName}`,
+    phone: phoneDisplay,
+    phoneDigits,
     email,
     score,
     scoreBand: score !== null ? scoreBand(score) : null,

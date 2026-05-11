@@ -9,6 +9,9 @@ import { parseAnswersFromParams, letterGrade } from "@/lib/parse-answers";
 function ResultInner() {
   const searchParams = useSearchParams();
   const router = useRouter();
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
   const [submitting, setSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
@@ -49,6 +52,9 @@ function ResultInner() {
         method: "POST",
         headers: { "content-type": "application/json" },
         body: JSON.stringify({
+          firstName,
+          lastName,
+          phone,
           email,
           score: result.total,
           archetype: result.archetype,
@@ -58,10 +64,14 @@ function ResultInner() {
       });
       if (!res.ok) {
         const data = (await res.json().catch(() => ({}))) as { error?: string };
+        const messageByError: Record<string, string> = {
+          invalid_email: "That email doesn't look right. Try again?",
+          invalid_name: "Please add your first and last name.",
+          invalid_phone: "That phone number doesn't look right.",
+        };
         setSubmitError(
-          data.error === "invalid_email"
-            ? "That email doesn't look right. Try again?"
-            : "Something went wrong. Try again?"
+          (data.error && messageByError[data.error]) ||
+            "Something went wrong. Try again?"
         );
         setSubmitting(false);
         return;
@@ -159,19 +169,49 @@ function ResultInner() {
           <p className="text-foreground-muted mb-6 text-lg">
             Get the full pillar-by-pillar breakdown plus 2 specific actions for each gap.
           </p>
-          <form onSubmit={unlock} className="flex flex-col sm:flex-row gap-3">
+          <form onSubmit={unlock} className="space-y-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <input
+                type="text"
+                required
+                autoComplete="given-name"
+                value={firstName}
+                onChange={(e) => setFirstName(e.target.value)}
+                placeholder="First name"
+                className="bg-background border border-border rounded-md px-4 py-3 text-lg focus:outline-none focus:border-accent"
+              />
+              <input
+                type="text"
+                required
+                autoComplete="family-name"
+                value={lastName}
+                onChange={(e) => setLastName(e.target.value)}
+                placeholder="Last name"
+                className="bg-background border border-border rounded-md px-4 py-3 text-lg focus:outline-none focus:border-accent"
+              />
+            </div>
+            <input
+              type="tel"
+              required
+              autoComplete="tel"
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
+              placeholder="Phone (for occasional text follow-ups)"
+              className="w-full bg-background border border-border rounded-md px-4 py-3 text-lg focus:outline-none focus:border-accent"
+            />
             <input
               type="email"
               required
+              autoComplete="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="you@gym.com"
-              className="flex-1 bg-background border border-border rounded-md px-4 py-3 focus:outline-none focus:border-accent"
+              className="w-full bg-background border border-border rounded-md px-4 py-3 text-lg focus:outline-none focus:border-accent"
             />
             <button
               type="submit"
               disabled={submitting}
-              className="bg-accent hover:bg-accent-hover text-background font-semibold px-6 py-3 rounded-md disabled:opacity-50 transition-colors"
+              className="w-full bg-accent hover:bg-accent-hover text-background font-semibold px-6 py-4 rounded-md disabled:opacity-50 transition-colors text-lg"
             >
               {submitting ? "Unlocking…" : "Unlock report →"}
             </button>
@@ -179,6 +219,10 @@ function ResultInner() {
           {submitError && (
             <p className="text-red-400 text-sm mt-3">{submitError}</p>
           )}
+          <p className="text-foreground-dim text-xs mt-4">
+            We&apos;ll only use your info to send your report and occasional coaching
+            tips. No spam. Unsubscribe any time.
+          </p>
         </div>
       </div>
     </main>
